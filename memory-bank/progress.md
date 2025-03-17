@@ -4,17 +4,16 @@
 
 - Memory bank initialization and documentation setup are complete.
 - Project structure (frontend and backend folders) is in place.
+- Frontend UI for cover letter input and feedback display is implemented.
 
 ## What's Left to Build
 
-- Frontend UI for cover letter input and feedback display.
-- Core text analysis logic for grammar, style, and tone.
-- Feedback generation and integration with the frontend.
-- (Potentially) Cover letter scoring/rating feature.
+- LLM integration, asking LLM to generate the feedback
+- Add visual star rating to feedback UI
 
 ## Current Status
 
-Currently in the initial setup and documentation phase. Core memory bank documentation is initialized and updated with project details. Project architecture and technology stack are defined. Backend API endpoint for receiving cover letter text is implemented. Moving to the next phase of implementing the backend logic and frontend UI.
+Frontend UI development is in progress. Backend API endpoint is ready to receive data.
 
 ## Known Issues
 

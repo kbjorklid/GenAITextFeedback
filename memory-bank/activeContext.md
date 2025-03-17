@@ -2,18 +2,19 @@
 
 ## Current Focus
 
-Currently focusing on getting the basic backend functionality (with mocked data) ready.
+Currently focusing on implementing LLM integration for cover letter analysis in the backend.
 
 ## Next Steps
 
-Next steps include:
 - Implement LLM integration for cover letter analysis in the backend.
-- Implement frontend to call the backend endpoint.
+- Test the complete feedback flow from frontend to backend with LLM feedback.
+- Add visual star rating to feedback UI
+- LLM integration
 
 ## Recent Changes
 
-- Added a new POST endpoint `/api/cover-letter-review` in `backend/src/index.ts` with placeholder response.
-- Implemented request body parsing for coverLetterText, wantedRole, and reviewerRole in the new endpoint.
+- Added feedback form to `frontend/src/app/app.component.html`.
+- Implemented form handling and backend communication in `frontend/src/app/app.component.ts`.
+- Updated `frontend/src/main.ts` to include `FormsModule` and `HttpClientModule`.
 
 ## Active Decisions and Considerations
-
