@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BACKEND_URL } from './app.config';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  standalone: true
+  standalone: true,
+  imports: [FormsModule, CommonModule]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   message: string = '';
+  desiredRole: string = '';
+  reviewerRole: string = '';
+  coverLetterText: string = '';
+  feedback: any = null;
 
   constructor(private http: HttpClient) {}
 
@@ -25,6 +32,24 @@ export class AppComponent implements OnInit {
       error: (error) => {
         console.error('Error fetching message:', error);
         this.message = 'Error fetching message.';
+      }
+    });
+  }
+
+  onSubmit() {
+    const formData = {
+      wantedRole: this.desiredRole,
+      reviewerRole: this.reviewerRole,
+      coverLetterText: this.coverLetterText
+    };
+
+    this.http.post<any>(`${BACKEND_URL}/api/cover-letter-review`, formData).subscribe({
+      next: (data) => {
+        this.feedback = data.feedback;
+      },
+      error: (error) => {
+        console.error('Error submitting feedback request:', error);
+        this.feedback = 'Error fetching feedback.';
       }
     });
   }

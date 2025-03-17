@@ -2,7 +2,7 @@
 
 ## Technologies Used
 
-- **Frontend:** Angular, TypeScript, HTML, CSS
+- **Frontend:** Angular, TypeScript, HTML, CSS, TailwindCSS
 - **Backend:** Node.js, Express, TypeScript
 - **Text Analysis:**  Potentially libraries like Natural or similar for NLP tasks (to be decided).
 - **Documentation:** Markdown

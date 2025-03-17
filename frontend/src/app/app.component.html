@@ -1,4 +1,34 @@
-<div style="text-align:center;">
-  <h1 class="text-6xl caret-red-700">Message from Backend:</h1>
-  <p>{{ message }}</p>
+<div class="container mx-auto p-4 md:flex">
+  <!-- Form Section (Left side on larger screens) -->
+  <div class="md:w-1/2 md:pr-4">
+    <h1 class="text-2xl font-bold mb-4">Get Your Cover Letter Feedback</h1>
+    <form (ngSubmit)="onSubmit()" class="space-y-4">
+      <div>
+        <label for="desiredRole" class="block text-gray-700 text-sm font-bold mb-2">Desired Role/Position:</label>
+        <input type="text" id="desiredRole" name="desiredRole" [(ngModel)]="desiredRole" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      </div>
+      <div>
+        <label for="reviewerRole" class="block text-gray-700 text-sm font-bold mb-2">What role should the AI take to review your letter?</label>
+        <input type="text" id="reviewerRole" name="reviewerRole" [(ngModel)]="reviewerRole" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      </div>
+      <div>
+        <label for="coverLetterText" class="block text-gray-700 text-sm font-bold mb-2">Your Cover Letter:</label>
+        <textarea id="coverLetterText" name="coverLetterText" [(ngModel)]="coverLetterText" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-48"></textarea>
+      </div>
+      <div class="flex items-center justify-between">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Get Feedback</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Feedback Section (Right side on larger screens, below form on smaller screens) -->
+  <div class="md:w-1/2 md:pl-4 mt-4 md:mt-0">
+    <h2 class="text-2xl font-bold mb-4">Feedback:</h2>
+    <div *ngIf="feedback" class="border p-4 rounded shadow-md">
+      <p>{{ feedback }}</p>
+    </div>
+    <div *ngIf="!feedback">
+      <p>No feedback yet. Submit your cover letter to get feedback.</p>
+    </div>
+  </div>
 </div>
