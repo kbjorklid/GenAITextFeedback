@@ -28,4 +28,4 @@ Thumbs.db
 *.sw*
 
 #env
-/.env
+/backend/.env
