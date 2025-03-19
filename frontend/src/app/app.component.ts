@@ -15,7 +15,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class AppComponent {
   message: string = '';
   desiredRole: string = '';
-  reviewerRole: string = '';
+  reviewerRole: string = 'Hiring manager of a medium-sized company';
+  textType: string = 'Cover letter';
   coverLetterText: string = '';
   feedback: any = null;
 
@@ -41,6 +42,7 @@ export class AppComponent {
     const formData = {
       wantedRole: this.desiredRole,
       reviewerRole: this.reviewerRole,
+      textType: this.textType,
       coverLetterText: this.coverLetterText
     };
 

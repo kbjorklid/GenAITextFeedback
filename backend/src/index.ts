@@ -30,14 +30,15 @@ app.post('/api/cover-letter-review', (req: Request, res: Response) => {
   const coverLetterText = req.body.coverLetterText;
   const wantedRole = req.body.wantedRole;
   const reviewerRole = req.body.reviewerRole;
+  const textType = req.body.textType;
 
-  const prompt = `You are to act in a role defined by the user. This role is: '${reviewerRole}'. Please review the following LinkedIn about page
-   for a candidate applying for the role of '${wantedRole}'. Provide feedback on the text, 
+  const prompt = `You are to act in a role defined by the user, and review the given text.
+   Provide feedback on the text, 
    focusing on areas for improvement, strengths, and overall effectiveness.
 
    <instructions>
-     <instruction>Assume the role given to you. This role may be a person or a more generic role.</instruction>
-     <instruction>The role is '${reviewerRole}'</instruction>
+     <instruction>Description of what the text being reviewed is: '${textType}'</instruction>
+     <instruction>Act in the role of '${reviewerRole}'</instruction>
      <instruction>Give feedback as if you were that person, or a person in that role</instruction>
      <instruction>Assume the candidate who has written the text aims for this role or title: '${wantedRole}'</instruction>
      <instruction>Format the result using HTML</instruction>

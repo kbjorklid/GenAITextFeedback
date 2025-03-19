@@ -12,7 +12,11 @@
         <input type="text" id="reviewerRole" name="reviewerRole" [(ngModel)]="reviewerRole" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
       </div>
       <div>
-        <label for="coverLetterText" class="block text-gray-700 text-sm font-bold mb-2">Your Cover Letter:</label>
+        <label for="textType" class="block text-gray-700 text-sm font-bold mb-2">Text Type:</label>
+        <input type="text" id="textType" name="textType" [(ngModel)]="textType" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" value="Cover letter">
+      </div>
+      <div>
+        <label for="coverLetterText" class="block text-gray-700 text-sm font-bold mb-2">Your Text:</label>
         <textarea id="coverLetterText" name="coverLetterText" [(ngModel)]="coverLetterText" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-48"></textarea>
       </div>
       <div class="flex items-center justify-between">
