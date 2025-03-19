@@ -9,7 +9,26 @@
       </div>
       <div>
         <label for="reviewerRole" class="block text-gray-700 text-sm font-bold mb-2">What role should the AI take to review your text?</label>
-        <input type="text" id="reviewerRole" name="reviewerRole" [(ngModel)]="reviewerRole" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <select id="reviewerRole" name="reviewerRole" [(ngModel)]="reviewerRole" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <option value="">-- Select or type --</option>
+          <option value="Simon Sinek">Simon Sinek (leadership expert, author of "Start With Why")</option>
+          <option value="Indra Nooyi">Indra Nooyi (former PepsiCo CEO, known for leadership and authenticity)</option>
+          <option value="Richard Branson">Richard Branson (Virgin Group founder, known for unconventional thinking)</option>
+          <option value="Sara Blakely">Sara Blakely (Spanx founder, approachable entrepreneurial voice)</option>
+          <option value="Reid Hoffman">Reid Hoffman (LinkedIn co-founder, expert on professional networking)</option>
+          <option value="Seth Godin">Seth Godin (marketing expert and author)</option>
+          <option value="Liz Ryan">Liz Ryan (HR expert with distinct, human-centered perspective)</option>
+          <option value="Adam Grant">Adam Grant (organizational psychologist and professor)</option>
+          <option value="Brené Brown">Brené Brown (research professor focusing on vulnerability and leadership)</option>
+          <option value="Patty McCord">Patty McCord (former Netflix Chief Talent Officer)</option>
+          <option value="Gary Vaynerchuk">Gary Vaynerchuk (marketing and social media expert)</option>
+          <option value="Dorie Clark">Dorie Clark (personal branding specialist)</option>
+          <option value="Cal Newport">Cal Newport (productivity and deep work expert)</option>
+          <option value="Carla Harris">Carla Harris (Morgan Stanley executive with excellent career advice)</option>
+          <option value="Malcolm Gladwell">Malcolm Gladwell (storytelling expertise, wide business knowledge)</option>
+          <option value="Daniel Pink">Daniel Pink (work and motivation expert)</option>
+          <option value="Sheryl Sandberg">Sheryl Sandberg (tech executive and author)</option>
+        </select>
       </div>
       <div>
         <label for="textType" class="block text-gray-700 text-sm font-bold mb-2">Text Type:</label>
