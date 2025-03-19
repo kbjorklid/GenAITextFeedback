@@ -2,7 +2,7 @@
 
 ## Current Focus
 
-Currently focusing on implementing LLM integration for cover letter analysis in the backend.
+Finalizing frontend UI and preparing for star rating implementation.
 
 ## Next Steps
 
@@ -16,5 +16,6 @@ Currently focusing on implementing LLM integration for cover letter analysis in 
 - Added feedback form to `frontend/src/app/app.component.html`.
 - Implemented form handling and backend communication in `frontend/src/app/app.component.ts`.
 - Updated `frontend/src/main.ts` to include `FormsModule` and `HttpClientModule`.
+- Updated `frontend/src/app/app.component.html` to use `[innerHTML]` for HTML feedback rendering.
 
 ## Active Decisions and Considerations

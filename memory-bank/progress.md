@@ -5,6 +5,7 @@
 - Memory bank initialization and documentation setup are complete.
 - Project structure (frontend and backend folders) is in place.
 - Frontend UI for cover letter input and feedback display is implemented.
+- HTML feedback rendering in frontend is working.
 
 ## What's Left to Build
 
@@ -13,7 +14,7 @@
 
 ## Current Status
 
-Frontend UI development is in progress. Backend API endpoint is ready to receive data.
+Frontend UI development is nearing completion. Backend API endpoint is ready to receive data and provide feedback.
 
 ## Known Issues
 

@@ -24,7 +24,7 @@
   <!-- Feedback Section (Right side on larger screens, below form on smaller screens) -->
   <div class="md:w-1/2 md:pl-4 mt-4 md:mt-0">
     <h2 class="text-2xl font-bold mb-4">Feedback:</h2>
-    <div *ngIf="feedback" class="border p-4 rounded shadow-md">
+    <div *ngIf="feedback" class="border p-4 rounded shadow-md feedback-container">
       <div [innerHTML]="feedback"></div>
     </div>
     <div *ngIf="!feedback">
