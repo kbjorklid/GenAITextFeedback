@@ -9,8 +9,8 @@
       </div>
       <div>
         <label for="reviewerRole" class="block text-gray-700 text-sm font-bold mb-2">What role should the AI take to review your text?</label>
-        <select id="reviewerRole" name="reviewerRole" [(ngModel)]="reviewerRole" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-          <option value="">-- Select or type --</option>
+        <input type="text" id="reviewerRole" name="reviewerRole" [(ngModel)]="reviewerRole" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" list="reviewerRolesList">
+        <datalist id="reviewerRolesList">
           <option value="Simon Sinek">Simon Sinek (leadership expert, author of "Start With Why")</option>
           <option value="Indra Nooyi">Indra Nooyi (former PepsiCo CEO, known for leadership and authenticity)</option>
           <option value="Richard Branson">Richard Branson (Virgin Group founder, known for unconventional thinking)</option>
@@ -28,7 +28,7 @@
           <option value="Malcolm Gladwell">Malcolm Gladwell (storytelling expertise, wide business knowledge)</option>
           <option value="Daniel Pink">Daniel Pink (work and motivation expert)</option>
           <option value="Sheryl Sandberg">Sheryl Sandberg (tech executive and author)</option>
-        </select>
+        </datalist>
       </div>
       <div>
         <label for="textType" class="block text-gray-700 text-sm font-bold mb-2">Text Type:</label>
