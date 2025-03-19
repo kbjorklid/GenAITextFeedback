@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BACKEND_URL } from './app.config';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent {
   coverLetterText: string = '';
   feedback: any = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
     this.fetchMessage();
@@ -45,7 +46,7 @@ export class AppComponent {
 
     this.http.post<any>(`${BACKEND_URL}/api/cover-letter-review`, formData).subscribe({
       next: (data) => {
-        this.feedback = data.feedback;
+        this.feedback = this.sanitizer.bypassSecurityTrustHtml(data.feedback);
       },
       error: (error) => {
         console.error('Error submitting feedback request:', error);

@@ -1,2 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+@layer base {
+    .feedback-container h2 {
+        font-size: large;
+        font-weight: bold;
+    }
+    .feedback-container h1 {
+       font-size: x-large;
+       font-weight: bold;
+    }
+}

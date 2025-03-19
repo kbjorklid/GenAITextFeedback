@@ -27,8 +27,8 @@
     <div *ngIf="feedback" class="border p-4 rounded shadow-md feedback-container">
       <div [innerHTML]="feedback"></div>
     </div>
-    <div *ngIf="!feedback">
-      <p>No feedback yet. Submit your cover letter to get feedback.</p>
+    <div *ngIf="!feedback" class="border p-4 rounded shadow-md">
+      <h1>No feedback yet. Submit your cover letter to get feedback.</h1>
     </div>
   </div>
 </div>

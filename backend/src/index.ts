@@ -43,7 +43,6 @@ app.post('/api/cover-letter-review', (req: Request, res: Response) => {
      <instruction>Format the result using HTML</instruction>
      <instruction>Format the result so that it can be used in an existing HTML page, in a div tag.</instruction>
      <instruction>For headers, use h1-h3 tags. Do not use smaller header tags</instruction>
-     <instruction>Do not include any markdown syntax. Specifically, do not include \`\`\`html or other back-tick markdown</instriction>
    </instructions>
   <textToReview>
   ${coverLetterText}
@@ -52,7 +51,14 @@ app.post('/api/cover-letter-review', (req: Request, res: Response) => {
   async function main() {
     const result = await model.generateContent(prompt);
     const response = result.response;
-    const feedbackFromGemini = response.text();
+    var feedbackFromGemini = response.text();
+
+    if (feedbackFromGemini.startsWith("```html")) {
+      feedbackFromGemini = feedbackFromGemini.slice("```html".length);
+    }
+    if (feedbackFromGemini.endsWith("```")) {
+      feedbackFromGemini = feedbackFromGemini.slice(0, -3);
+    }
 
     // Basic star rating (can be improved based on feedback analysis)
     const starRating = feedbackFromGemini.includes("strengths") ? 4 : 3; 
