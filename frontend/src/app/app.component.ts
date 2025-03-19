@@ -19,6 +19,7 @@ export class AppComponent {
   textType: string = 'Cover letter';
   inputText: string = '';
   feedback: any = null;
+  isLoading: boolean = false;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
@@ -39,6 +40,7 @@ export class AppComponent {
   }
 
   onSubmit() {
+    this.isLoading = true;
     const formData = {
       wantedRole: this.desiredRole,
       reviewerRole: this.reviewerRole,
@@ -49,10 +51,12 @@ export class AppComponent {
     this.http.post<any>(`${BACKEND_URL}/api/text-review`, formData).subscribe({
       next: (data) => {
         this.feedback = this.sanitizer.bypassSecurityTrustHtml(data.feedback);
+        this.isLoading = false;
       },
       error: (error) => {
         console.error('Error submitting feedback request:', error);
         this.feedback = 'Error fetching feedback.';
+        this.isLoading = false;
       }
     });
   }

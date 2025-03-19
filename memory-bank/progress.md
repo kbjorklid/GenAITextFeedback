@@ -7,10 +7,11 @@
 - Frontend UI for text input and feedback display is implemented (generic, not cover letter specific).
 - HTML feedback rendering in frontend is working.
 - Generic text feedback functionality (no cover letter specific references).
+- Loading state for 'Get Feedback' button.
+- Disabled button is grayed out.
 
 ## What's Left to Build
 
-- LLM integration, asking LLM to generate the feedback
 - Add visual star rating to feedback UI
 
 ## Current Status

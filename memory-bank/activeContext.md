@@ -2,7 +2,7 @@
 
 ## Current Focus
 
-Finalizing frontend UI and preparing for star rating implementation.  The application is now more generic and not specific to cover letters.
+Finalizing frontend UI and preparing for star rating implementation.  The application is now more generic and not specific to cover letters.  The disabled button is also styled gray now.
 
 ## Next Steps
 
@@ -19,5 +19,6 @@ Finalizing frontend UI and preparing for star rating implementation.  The applic
 - Updated `frontend/src/app/app.component.html` to use `[innerHTML]` for HTML feedback rendering.
 - Renamed `coverLetterText` to `inputText` in frontend and backend.
 - Renamed API endpoint to `/api/text-review`.
+- Added CSS styling for disabled button (gray button).
 
 ## Active Decisions and Considerations
