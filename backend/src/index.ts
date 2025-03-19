@@ -32,15 +32,18 @@ app.post('/api/cover-letter-review', (req: Request, res: Response) => {
   const reviewerRole = req.body.reviewerRole;
   const textType = req.body.textType;
 
-  const prompt = `You are to act in a role defined by the user, and review the given text.
-   Provide feedback on the text, 
-   focusing on areas for improvement, strengths, and overall effectiveness.
+  const reviewerRolePart = isNonEmptyString(reviewerRole) ? `<instruction>Act in the role of '${reviewerRole}'</instruction>
+     <instruction>Give feedback as if you were that person, or a person in that role</instruction>` : "";
+  const wantedRolePart = isNonEmptyString(wantedRole) ? `<instruction>Assume the candidate who has written the text aims for this role or title: '${wantedRole}'</instruction>` : "";
+  const textTypePart = isNonEmptyString(textType) ? `<instruction>Treat this text as the following: '${textType}'</instruction>` : "";
+
+  const prompt = `Review the given text.
 
    <instructions>
-     <instruction>Description of what the text being reviewed is: '${textType}'</instruction>
-     <instruction>Act in the role of '${reviewerRole}'</instruction>
-     <instruction>Give feedback as if you were that person, or a person in that role</instruction>
-     <instruction>Assume the candidate who has written the text aims for this role or title: '${wantedRole}'</instruction>
+    <instruction>Provide feedback on the text, focusing on areas for improvement, strengths, and overall effectiveness.</instruction>
+     ${textTypePart}
+     ${wantedRolePart}
+     ${reviewerRolePart}
      <instruction>Format the result using HTML</instruction>
      <instruction>Format the result so that it can be used in an existing HTML page, in a div tag.</instruction>
      <instruction>For headers, use h1-h3 tags. Do not use smaller header tags</instruction>
@@ -79,3 +82,7 @@ app.post('/api/cover-letter-review', (req: Request, res: Response) => {
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
+
+function isNonEmptyString(str: string): boolean {
+  return str.trim().length > 0;
+}
