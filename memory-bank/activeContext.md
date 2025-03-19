@@ -2,7 +2,7 @@
 
 ## Current Focus
 
-Finalizing frontend UI and preparing for star rating implementation.
+Finalizing frontend UI and preparing for star rating implementation.  The application is now more generic and not specific to cover letters.
 
 ## Next Steps
 
@@ -17,5 +17,7 @@ Finalizing frontend UI and preparing for star rating implementation.
 - Implemented form handling and backend communication in `frontend/src/app/app.component.ts`.
 - Updated `frontend/src/main.ts` to include `FormsModule` and `HttpClientModule`.
 - Updated `frontend/src/app/app.component.html` to use `[innerHTML]` for HTML feedback rendering.
+- Renamed `coverLetterText` to `inputText` in frontend and backend.
+- Renamed API endpoint to `/api/text-review`.
 
 ## Active Decisions and Considerations

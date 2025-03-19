@@ -24,10 +24,10 @@ app.get('/api/hello', (req: Request, res: Response) => {
   res.json({ message: 'Hello, World' });
 });
 
-// POST endpoint for cover letter review
-app.post('/api/cover-letter-review', (req: Request, res: Response) => {
+// POST endpoint for text review
+app.post('/api/text-review', (req: Request, res: Response) => {
   // Extract data from request body
-  const coverLetterText = req.body.coverLetterText;
+  const inputText = req.body.inputText;
   const wantedRole = req.body.wantedRole;
   const reviewerRole = req.body.reviewerRole;
   const textType = req.body.textType;
@@ -49,7 +49,7 @@ app.post('/api/cover-letter-review', (req: Request, res: Response) => {
      <instruction>For headers, use h1-h3 tags. Do not use smaller header tags</instruction>
    </instructions>
   <textToReview>
-  ${coverLetterText}
+  ${inputText}
   </textToReview>`;
 
   async function main() {

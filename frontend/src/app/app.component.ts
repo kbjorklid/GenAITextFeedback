@@ -17,7 +17,7 @@ export class AppComponent {
   desiredRole: string = '';
   reviewerRole: string = 'Hiring manager of a medium-sized company';
   textType: string = 'Cover letter';
-  coverLetterText: string = '';
+  inputText: string = '';
   feedback: any = null;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
@@ -43,10 +43,10 @@ export class AppComponent {
       wantedRole: this.desiredRole,
       reviewerRole: this.reviewerRole,
       textType: this.textType,
-      coverLetterText: this.coverLetterText
+      inputText: this.inputText
     };
 
-    this.http.post<any>(`${BACKEND_URL}/api/cover-letter-review`, formData).subscribe({
+    this.http.post<any>(`${BACKEND_URL}/api/text-review`, formData).subscribe({
       next: (data) => {
         this.feedback = this.sanitizer.bypassSecurityTrustHtml(data.feedback);
       },
