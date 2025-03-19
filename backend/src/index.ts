@@ -31,15 +31,23 @@ app.post('/api/cover-letter-review', (req: Request, res: Response) => {
   const wantedRole = req.body.wantedRole;
   const reviewerRole = req.body.reviewerRole;
 
-  const prompt = `You are to act in a role defined by the user. This role is: '${reviewerRole}'. Please review the following cover letter
-   for a candidate applying for the role of '${wantedRole}'. Provide feedback on the cover letter, 
+  const prompt = `You are to act in a role defined by the user. This role is: '${reviewerRole}'. Please review the following LinkedIn about page
+   for a candidate applying for the role of '${wantedRole}'. Provide feedback on the text, 
    focusing on areas for improvement, strengths, and overall effectiveness.
 
-   Format the result using HTML, but notice that the content is going to be shown inline, so assume the
-   content will be placed inside a 'div' on an existing (wrapping) html page.
-
-  Cover Letter:
-  ${coverLetterText}`;
+   <instructions>
+     <instruction>Assume the role given to you. This role may be a person or a more generic role.</instruction>
+     <instruction>The role is '${reviewerRole}'</instruction>
+     <instruction>Give feedback as if you were that person, or a person in that role</instruction>
+     <instruction>Assume the candidate who has written the text aims for this role or title: '${wantedRole}'</instruction>
+     <instruction>Format the result using HTML</instruction>
+     <instruction>Format the result so that it can be used in an existing HTML page, in a div tag.</instruction>
+     <instruction>For headers, use h1-h3 tags. Do not use smaller header tags</instruction>
+     <instruction>Do not include any markdown syntax. Specifically, do not include \`\`\`html or other back-tick markdown</instriction>
+   </instructions>
+  <textToReview>
+  ${coverLetterText}
+  </textToReview>`;
 
   async function main() {
     const result = await model.generateContent(prompt);
