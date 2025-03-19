@@ -19,6 +19,7 @@ export class AppComponent {
   textType: string = 'Cover letter';
   inputText: string = '';
   feedback: any = null;
+  starRating: number | null = null;
   isLoading: boolean = false;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
@@ -50,6 +51,7 @@ export class AppComponent {
 
     this.http.post<any>(`${BACKEND_URL}/api/text-review`, formData).subscribe({
       next: (data) => {
+        this.starRating = data.starRating;
         this.feedback = this.sanitizer.bypassSecurityTrustHtml(data.feedback);
         this.isLoading = false;
       },

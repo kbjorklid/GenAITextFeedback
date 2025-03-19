@@ -39,7 +39,7 @@ app.post('/api/text-review', (req: Request, res: Response) => {
 
   const prompt = `Review the given text.
 
-   <instructions>
+  <instructions>
     <instruction>Provide feedback on the text, focusing on areas for improvement, strengths, and overall effectiveness.</instruction>
      ${textTypePart}
      ${wantedRolePart}
@@ -47,7 +47,20 @@ app.post('/api/text-review', (req: Request, res: Response) => {
      <instruction>Format the result using HTML</instruction>
      <instruction>Format the result so that it can be used in an existing HTML page, in a div tag.</instruction>
      <instruction>For headers, use h1-h3 tags. Do not use smaller header tags</instruction>
-   </instructions>
+  </instructions>
+  <outputFormat>
+    <description>
+    Respond with a JSON object with the following keys:
+    - "starRating": A star rating between 0.0 and 5.0, with half-star accuracy
+    - "feedback": The HTML formatted feedback text
+    </description>
+    <example>
+    {
+      "starRating": 4.5,
+      "feedback": "(feedback as html goes here)"
+    }
+    </example>
+  </outputFormat>
   <textToReview>
   ${inputText}
   </textToReview>`;
@@ -57,20 +70,24 @@ app.post('/api/text-review', (req: Request, res: Response) => {
     const response = result.response;
     var feedbackFromGemini = response.text();
 
-    if (feedbackFromGemini.startsWith("```html")) {
-      feedbackFromGemini = feedbackFromGemini.slice("```html".length);
-    }
-    if (feedbackFromGemini.endsWith("```")) {
-      feedbackFromGemini = feedbackFromGemini.slice(0, -3);
+    feedbackFromGemini = cleanupGeminiOutput(feedbackFromGemini);
+
+    console.log("From Gemini:", feedbackFromGemini);
+    
+    var feedbackJson;
+    try {
+      feedbackJson = JSON.parse(feedbackFromGemini);
+    } catch (e) {
+      console.error("Failed to parse feedback as JSON", e);
+      // Handle non-JSON response gracefully, or throw error
+      feedbackJson = {
+        starRating: 3, // Default rating in case of parsing error
+        feedback: feedbackFromGemini // Fallback to raw text feedback
+      };
     }
 
-    // Basic star rating (can be improved based on feedback analysis)
-    const starRating = feedbackFromGemini.includes("strengths") ? 4 : 3; 
 
-    res.json({
-      starRating: starRating,
-      feedback: feedbackFromGemini,
-    });
+    res.json(feedbackJson);
   }
 
   main().catch(error => {
@@ -86,3 +103,13 @@ app.listen(port, () => {
 function isNonEmptyString(str: string): boolean {
   return str.trim().length > 0;
 }
+function cleanupGeminiOutput(feedbackFromGemini: string): string {
+  if (feedbackFromGemini.startsWith("```json")) {
+    feedbackFromGemini = feedbackFromGemini.slice("```json".length).trim();
+  }
+  if (feedbackFromGemini.endsWith("```")) {
+    feedbackFromGemini = feedbackFromGemini.slice(0, -3).trim();
+  }
+  return feedbackFromGemini;
+}
+
