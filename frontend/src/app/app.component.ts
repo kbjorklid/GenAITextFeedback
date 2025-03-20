@@ -18,6 +18,7 @@ export class AppComponent {
   reviewerRole: string = 'Hiring manager of a medium-sized company';
   textType: string = 'Cover letter';
   inputText: string = '';
+  customInstructions: string = '';
   feedback: any = null;
   starRating: number | null = null;
   isLoading: boolean = false;
@@ -46,7 +47,8 @@ export class AppComponent {
       wantedRole: this.desiredRole,
       reviewerRole: this.reviewerRole,
       textType: this.textType,
-      inputText: this.inputText
+      inputText: this.inputText,
+      customInstructions: this.customInstructions
     };
 
     this.http.post<any>(`${BACKEND_URL}/api/text-review`, formData).subscribe({

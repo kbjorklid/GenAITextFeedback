@@ -31,11 +31,25 @@ app.post('/api/text-review', (req: Request, res: Response) => {
   const wantedRole = req.body.wantedRole;
   const reviewerRole = req.body.reviewerRole;
   const textType = req.body.textType;
+  const customInstructions = req.body.customInstructions;
 
   const reviewerRolePart = isNonEmptyString(reviewerRole) ? `<instruction>Act in the role of '${reviewerRole}'</instruction>
      <instruction>Give feedback as if you were that person, or a person in that role</instruction>` : "";
   const wantedRolePart = isNonEmptyString(wantedRole) ? `<instruction>Assume the candidate who has written the text aims for this role or title: '${wantedRole}'</instruction>` : "";
   const textTypePart = isNonEmptyString(textType) ? `<instruction>Treat this text as the following: '${textType}'</instruction>` : "";
+  var customInstructionsPart;
+  var customInstructionsSection;
+  if (!isNonEmptyString(customInstructions)) {
+    customInstructionsPart = "";
+    customInstructionsSection = "";
+  } else if (isNonEmptyString(reviewerRole)) {
+    customInstructionsPart = '<instruction>User has provided additional instructions (see userInstructions section below). This may contain direct instructions, or \'inspiration\' - maybe an article that relates to the type of text. Use this as secondary source of information while reviewing the text.</instruction>';
+    customInstructionsSection = `<userInstructions>
+    ${customInstructions}
+    </userInstructions>`;
+  } else {
+    customInstructionsPart = '<instruction>User has provided additional instructions (see userInstructions section below). This may contain direct instructions, or \'inspiration\' - maybe an article that relates to the type of text.</instruction>';
+  }
 
   const prompt = `Review the given text.
 
@@ -44,10 +58,11 @@ app.post('/api/text-review', (req: Request, res: Response) => {
      ${textTypePart}
      ${wantedRolePart}
      ${reviewerRolePart}
+     ${customInstructionsPart}
      <instruction>Format the result using HTML</instruction>
      <instruction>Format the result so that it can be used in an existing HTML page, in a div tag.</instruction>
      <instruction>For headers, use h1-h3 tags. Do not use smaller header tags</instruction>
-  </instructions>
+   </instructions>
   <outputFormat>
     <description>
     Respond with a JSON object with the following keys:
@@ -61,6 +76,7 @@ app.post('/api/text-review', (req: Request, res: Response) => {
     }
     </example>
   </outputFormat>
+  ${customInstructionsSection}
   <textToReview>
   ${inputText}
   </textToReview>`;
@@ -112,4 +128,3 @@ function cleanupGeminiOutput(feedbackFromGemini: string): string {
   }
   return feedbackFromGemini;
 }
-
