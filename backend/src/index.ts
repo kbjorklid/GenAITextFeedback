@@ -42,13 +42,18 @@ app.post('/api/text-review', (req: Request, res: Response) => {
   if (!isNonEmptyString(customInstructions)) {
     customInstructionsPart = "";
     customInstructionsSection = "";
-  } else if (isNonEmptyString(reviewerRole)) {
-    customInstructionsPart = '<instruction>User has provided additional instructions (see userInstructions section below). This may contain direct instructions, or \'inspiration\' - maybe an article that relates to the type of text. Use this as secondary source of information while reviewing the text.</instruction>';
+  } else {
     customInstructionsSection = `<userInstructions>
     ${customInstructions}
     </userInstructions>`;
-  } else {
-    customInstructionsPart = '<instruction>User has provided additional instructions (see userInstructions section below). This may contain direct instructions, or \'inspiration\' - maybe an article that relates to the type of text.</instruction>';
+    if (isNonEmptyString(reviewerRole)) {
+      customInstructionsPart = '<instruction>User has provided additional instructions (see userInstructions section below). '
+      'This may contain direct instructions, or \'inspiration\' - maybe an article that relates to the type of text. Use this '
+      'as secondary source of information while reviewing the text.</instruction>';
+    } else {
+      customInstructionsPart = '<instruction>User has provided additional instructions (see userInstructions section below). '
+      'This may contain direct instructions, or \'inspiration\' - maybe an article that relates to the type of text.</instruction>';
+    }
   }
 
   const prompt = `Review the given text.
